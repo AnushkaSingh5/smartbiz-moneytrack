@@ -1,0 +1,163 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+#root {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+    position: relative;
+    margin: 0;
+}
+
+/* Full Width Header */
+header.gradient-bg {
+    width: 100%;
+    border-radius: 0 0 40px 40px;
+    padding: 3rem 8% !important;
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+}
+
+main {
+    padding: 0 8% 5rem 8% !important;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+/* On super large screens, center the grid content */
+@media (min-width: 1600px) {
+    main {
+        max-width: 1800px;
+    }
+}
+
+.transaction-income {
+    border-left: 6px solid #10b981;
+}
+
+.transaction-expense {
+    border-left: 6px solid #ef4444;
+}
+
+.tab-active {
+    color: #6366f1;
+    border-bottom: 4px solid #6366f1;
+}
+
+.floating-btn {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-btn:hover {
+    transform: translateY(-4px) scale(1.08);
+}
+
+.floating-btn:active {
+    transform: scale(0.92);
+}
+
+.slide-in {
+    animation: slideIn 0.4s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 5px;
+    background-color: #e5e7eb;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 5px;
+}
+
+.permission-modal, .filter-modal, .rule-modal {
+    z-index: 1000;
+}
+
+.sms-content {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.date-filter {
+    transition: all 0.3s ease;
+}
+
+.date-filter.active {
+    background-color: #6366f1;
+    color: white;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Grid layout for Desktop */
+@media (min-width: 1024px) {
+    .desktop-grid {
+        display: grid;
+        grid-template-columns: 2.8fr 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+}
