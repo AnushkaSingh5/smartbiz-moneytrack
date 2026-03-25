@@ -106,7 +106,7 @@ const Home = () => {
 
   const handleFetchTransactions = async () => {
     try {
-      const res = await axios.get('http://smartbiz-moneytrack-backend.onrender.com/all', { timeout: 10000 });
+      const res = await axios.get('https://smartbiz-moneytrack-backend.onrender.com/all', { timeout: 10000 });
       setTransactions(res.data);
     } catch (error) {
       console.error('SERVER ERROR (Fetch):', error.response?.data || error.message);
