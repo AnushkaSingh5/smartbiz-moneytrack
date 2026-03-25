@@ -106,7 +106,7 @@ const Home = () => {
 
   const handleFetchTransactions = async () => {
     try {
-      const res = await axios.get('http://127.0.0.1:5000/all', { timeout: 10000 });
+      const res = await axios.get('http://smartbiz-moneytrack-backend.onrender.com/all', { timeout: 10000 });
       setTransactions(res.data);
     } catch (error) {
       console.error('SERVER ERROR (Fetch):', error.response?.data || error.message);
@@ -119,7 +119,7 @@ const Home = () => {
 
   const handleAddTransaction = async (newTransaction) => {
     try {
-      await axios.post('http://127.0.0.1:5000/add', newTransaction, { timeout: 10000 });
+      await axios.post('https://smartbiz-moneytrack-backend.onrender.com/add', newTransaction, { timeout: 10000 });
       await handleFetchTransactions(); 
       setIsAddModalOpen(false); 
     } catch (error) {
@@ -130,7 +130,7 @@ const Home = () => {
   const handleImportSelectedSMS = async (selected) => {
     try {
       for (const t of selected) {
-        await axios.post('http://127.0.0.1:5000/add', t, { timeout: 10000 });
+        await axios.post('https://smartbiz-moneytrack-backend.onrender.com/add', t, { timeout: 10000 });
       }
       setPendingSMSTransactions([]);
       await handleFetchTransactions();

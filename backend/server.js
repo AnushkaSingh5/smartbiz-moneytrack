@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const path = require("path");
 const transactionRoutes = require("./routes/transactionRoutes");
 
 dotenv.config();
@@ -10,28 +9,33 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware for detailed request logging
+// Middleware for logging
 app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-    next();
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
 });
 
-app.use(cors());
+// ✅ CORS (important for frontend connection)
+app.use(cors({
+  origin: "*", // you can restrict later
+}));
+
 app.use(express.json());
 
-// Routes
-app.use("/", transactionRoutes); // Map routes to root since frontend expects /all and /add
+// ✅ Routes
+app.use("/", transactionRoutes);
 
-// Database Connection
-mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/moneytrack", {
-    serverSelectionTimeoutMS: 5000 // If it can't connect in 5s, it will tell us why!
+// ✅ MongoDB Connection (PRODUCTION SAFE)
+mongoose.connect(process.env.MONGO_URI, {
+  serverSelectionTimeoutMS: 5000,
 })
 .then(() => {
-    console.log("MongoDB is now connected! 🚀");
-    app.listen(PORT, "0.0.0.0", () => {
-        console.log(`Server is running at: http://127.0.0.1:${PORT}`);
-    });
+  console.log("MongoDB connected 🚀");
+
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 })
 .catch((err) => {
-    console.error("CRITICAL: MongoDB connection failed:", err.message);
+  console.error("MongoDB connection failed:", err.message);
 });
